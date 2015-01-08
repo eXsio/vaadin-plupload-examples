@@ -23,19 +23,21 @@
  */
 package pl.exsio.plupload.examples.ui;
 
+import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.*;
-import java.io.File;
 import javax.servlet.annotation.WebServlet;
-import pl.exsio.plupload.Plupload;
-import pl.exsio.plupload.PluploadFile;
-import pl.exsio.plupload.field.PluploadField;
-import pl.exsio.plupload.helper.filter.PluploadFilter;
-import pl.exsio.plupload.helper.resize.PluploadImageResize;
-import pl.exsio.plupload.manager.PluploadManager;
+import pl.exsio.plupload.examples.AdvancedUploaderExample;
+import pl.exsio.plupload.examples.ByteArrayUploaderFieldExample;
+import pl.exsio.plupload.examples.FileUploaderFieldExample;
+import pl.exsio.plupload.examples.SimpleUploadManagerExample;
+import pl.exsio.plupload.examples.SimpleUploaderExample;
+import pl.exsio.plupload.examples.UploadManagerWithFileFilterExample;
+import pl.exsio.plupload.examples.UploadManagerWithImageResizeExample;
 
+@Theme("valo")
 public class PluploadExamplesUI extends UI {
 
     @WebServlet(value = "/*", asyncSupported = false)
@@ -50,55 +52,21 @@ public class PluploadExamplesUI extends UI {
         mainLayout.setSpacing(true);
         mainLayout.setMargin(true);
 
-        PluploadManager mgr = createUploadManager("Manager 1");
-        PluploadManager mgr2 = createUploadManager("Manager 2");
+        Accordion acc = new Accordion();
+        acc.addTab(new Home(), "Home");
+        acc.addTab(new SimpleUploaderExample(), "Simple \"Plupload\" example");
+        acc.addTab(new AdvancedUploaderExample(), "\"Plupload\" example with all options");
+        acc.addTab(new SimpleUploadManagerExample(), "Simple \"UploadManager\" example");
+        acc.addTab(new UploadManagerWithFileFilterExample(), "\"UploadManager\" with file filter example");
+        acc.addTab(new UploadManagerWithImageResizeExample(), "\"UploadManager\" with image resize example");
+        acc.addTab(new FileUploaderFieldExample(), "\"UploadField\" example with java.io.File value");
+        acc.addTab(new ByteArrayUploaderFieldExample(), "\"UploadField\" example with byte[] value");
 
-        mgr.getUploader().addFilter(new PluploadFilter("music", "mp3, flac"));
-        mgr2.getUploader().addFilter(new PluploadFilter("images", "jpg, jpeg, png"));
-        mgr2.getUploader().setImageResize(new PluploadImageResize().setEnabled(true).setCrop(true).setHeight(200).setWidth(400));
-
-        mainLayout.addComponent(mgr);
-        mainLayout.addComponent(mgr2);
-
-        final PluploadField<File> field = new PluploadField(File.class);
-        field.getUploader().addUploadCompleteListener(new Plupload.UploadCompleteListener() {
-
-            @Override
-            public void onUploadComplete() {
-                File file = field.getValue();
-
-                System.out.println(file != null ? file.getAbsolutePath() : "null");
-            }
-        });
-
-        mainLayout.addComponent(field);
+        mainLayout.addComponent(acc);
+        acc.setSizeFull();
+        mainLayout.setSizeFull();
 
         this.setContent(mainLayout);
 
     }
-
-    private PluploadManager createUploadManager(final String name) {
-        final PluploadManager mgr = new PluploadManager();
-   //     mgr.getUploader().setUploadPath("/home/exsio");
-        System.out.println("upload path for "+name+": "+mgr.getUploader().getUploadPath());
-        mgr.getUploader().addUploadCompleteListener(new Plupload.UploadCompleteListener() {
-
-            @Override
-            public void onUploadComplete() {
-                System.out.println("Files uploaded by " + name + ": ");
-                for (PluploadFile file : mgr.getUploadedFiles()) {
-                    System.out.println(file.getUploadedFile().getAbsolutePath());
-                }
-            }
-        });
-        mgr.getUploader().addFileFilteredListener(new Plupload.FileFilteredListener() {
-
-            @Override
-            public void onFileFiltered(PluploadFile file) {
-                System.out.println("This file was filtered: " + file.getName());
-            }
-        });
-        return mgr;
-    }
-
 }
