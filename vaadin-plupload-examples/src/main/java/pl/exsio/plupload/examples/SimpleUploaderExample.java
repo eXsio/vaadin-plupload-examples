@@ -41,6 +41,14 @@ public class SimpleUploaderExample extends AbstractExample {
                 uploader.start();
             }
         });
+
+        uploader.addUploadCompleteListener(new Plupload.UploadCompleteListener() {
+
+            @Override
+            public void onUploadComplete() {
+                info.setValue("upload is completed!");
+            }
+        });
         pane.addComponent(uploader);
         pane.addComponent(info);
     }
@@ -56,20 +64,28 @@ public class SimpleUploaderExample extends AbstractExample {
                 + "       @Override\n"
                 + "       public void onFileUploaded(PluploadFile file) {\n"
                 + "             Notification.show(\"I've just uploaded file: \" + file.getName());\n"
-                + "       }\n\n"
+                + "       }\n"
+                + "});\n\n"                
                 + "//update upload progress\n"
                 + "uploader.addUploadProgressListener(new Plupload.UploadProgressListener() {\n"
                 + "       @Override\n"
                 + "       public void onUploadProgress(PluploadFile file) {\n"
                 + "             info.setValue(\"I'm uploading \"+file.getName()+\" and I'm at \"+file.getPercent()+\"%\");\n"
                 + "       }\n"
-                + "});"
+
                 + "});\n\n"
                 + "//autostart the uploader after addind files\n"
                 + "uploader.addFilesAddedListener(new Plupload.FilesAddedListener() {\n"
                 + "       @Override\n"
                 + "       public void onFilesAdded(PluploadFile[] files) {\n"
                 + "             uploader.start();\n"
+                + "       }\n"
+                + "});\n\n"
+                + "//notify, when the upload process is completed\n"
+                + "uploader.addUploadCompleteListener(new Plupload.UploadCompleteListener() {\n"
+                + "       @Override\n"
+                + "       public void onUploadComplete() {\n"
+                + "             info.setValue(\"upload is completed!\");\n"
                 + "       }\n"
                 + "});");
     }

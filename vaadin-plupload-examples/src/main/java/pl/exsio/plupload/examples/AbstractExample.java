@@ -27,6 +27,7 @@ public abstract class AbstractExample extends HorizontalLayout {
     private VerticalLayout getActionPane() {
         VerticalLayout layout = new VerticalLayout();
         layout.setSizeFull();
+        layout.setHeightUndefined();
         this.decorateActionPane(layout);
         return layout;
     }
@@ -43,7 +44,9 @@ public abstract class AbstractExample extends HorizontalLayout {
         code.setLanguage(CodeMirrorLanguage.JAVA);
         layout.addComponent(code);
         layout.setSizeFull();
+
         code.setSizeFull();
+        code.setHeight("500px");
         return layout;
     }
 }

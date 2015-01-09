@@ -24,6 +24,7 @@
 package pl.exsio.plupload.examples.ui;
 
 import com.vaadin.annotations.Theme;
+import com.vaadin.annotations.Title;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
@@ -38,6 +39,7 @@ import pl.exsio.plupload.examples.UploadManagerWithFileFilterExample;
 import pl.exsio.plupload.examples.UploadManagerWithImageResizeExample;
 
 @Theme("valo")
+@Title("Plupload add-on for Vaadin examples")
 public class PluploadExamplesUI extends UI {
 
     @WebServlet(value = "/*", asyncSupported = false)

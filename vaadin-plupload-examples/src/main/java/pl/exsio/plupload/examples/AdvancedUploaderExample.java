@@ -44,6 +44,14 @@ public class AdvancedUploaderExample extends AbstractExample {
                 uploader.start();
             }
         });
+        
+        uploader.addUploadCompleteListener(new Plupload.UploadCompleteListener() {
+
+            @Override
+            public void onUploadComplete() {
+                info.setValue("upload is completed!");
+            }
+        });
 
         uploader.setOption(PluploadOption.CHUNK_SIZE, "1mb");
         uploader.setOption(PluploadOption.MAX_RETRIES, "5");
@@ -67,7 +75,8 @@ public class AdvancedUploaderExample extends AbstractExample {
                 + "       @Override\n"
                 + "       public void onFileUploaded(PluploadFile file) {\n"
                 + "             Notification.show(\"I've just uploaded file: \" + file.getName());\n"
-                + "       }\n\n"
+                + "       }\n"
+                + "});\n\n"
                 + "//update upload progress\n"
                 + "uploader.addUploadProgressListener(new Plupload.UploadProgressListener() {\n"
                 + "       @Override\n"
@@ -81,6 +90,13 @@ public class AdvancedUploaderExample extends AbstractExample {
                 + "       @Override\n"
                 + "       public void onFilesAdded(PluploadFile[] files) {\n"
                 + "             uploader.start();\n"
+                + "       }\n"
+                + "});\n\n"     
+                + "//notify, when the upload process is completed\n"
+                + "uploader.addUploadCompleteListener(new Plupload.UploadCompleteListener() {\n"
+                + "       @Override\n"
+                + "       public void onUploadComplete() {\n"
+                + "             info.setValue(\"upload is completed!\");\n"
                 + "       }\n"
                 + "});\n\n"
                 + "uploader.setOption(PluploadOption.CHUNK_SIZE, \"1mb\");\n"
