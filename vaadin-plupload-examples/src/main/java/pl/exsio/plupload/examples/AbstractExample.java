@@ -20,8 +20,8 @@ public abstract class AbstractExample extends HorizontalLayout {
         VerticalLayout code = this.getCodePane();
         this.addComponent(manager);
         this.addComponent(code);
-        this.setExpandRatio(code, 0.7f);
-        this.setExpandRatio(manager, 0.3f);
+        this.setExpandRatio(code, 0.75f);
+        this.setExpandRatio(manager, 0.25f);
     }
 
     private VerticalLayout getActionPane() {
@@ -45,7 +45,7 @@ public abstract class AbstractExample extends HorizontalLayout {
         layout.addComponent(code);
         layout.setSizeFull();
 
-        code.setSizeFull();
+        code.setWidth("900px");
         code.setHeight("500px");
         return layout;
     }

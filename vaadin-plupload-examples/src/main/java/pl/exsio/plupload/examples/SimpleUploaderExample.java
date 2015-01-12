@@ -80,7 +80,8 @@ public class SimpleUploaderExample extends AbstractExample {
                 + "uploader.addUploadProgressListener(new Plupload.UploadProgressListener() {\n"
                 + "       @Override\n"
                 + "       public void onUploadProgress(PluploadFile file) {\n"
-                + "             info.setValue(\"I'm uploading \"+file.getName()+\" and I'm at \"+file.getPercent()+\"%\");\n"
+                + "             info.setValue(\"I'm uploading \"+file.getName()\n"
+                + "                 +\"and I'm at \"+file.getPercent()+\"%\");\n"
                 + "       }\n"
                 + "});\n\n"
                 + "//autostart the uploader after addind files\n"
@@ -101,7 +102,8 @@ public class SimpleUploaderExample extends AbstractExample {
                 + "uploader.addErrorListener(new Plupload.ErrorListener() {\n"
                 + "       @Override\n"
                 + "       public void onError(PluploadError error) {\n"
-                + "             Notification.show(\"There was an error: \" + error.getMessage(), Notification.Type.ERROR_MESSAGE);\n"
+                + "             Notification.show(\"There was an error: \"\n"
+                + "                 + error.getMessage(), Notification.Type.ERROR_MESSAGE);\n"
                 + "       }\n"
                 + "});");
     }

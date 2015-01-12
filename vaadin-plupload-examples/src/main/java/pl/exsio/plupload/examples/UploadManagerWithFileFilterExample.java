@@ -52,7 +52,8 @@ public class UploadManagerWithFileFilterExample extends AbstractExample {
                 + "manager.getUploader().addErrorListener(new Plupload.ErrorListener() {\n"
                 + "       @Override\n"
                 + "       public void onError(PluploadError error) {\n"
-                + "             Notification.show(\"There was an error: \" + error.getMessage(), Notification.Type.ERROR_MESSAGE);\n"
+                + "             Notification.show(\"There was an error: \"\n"
+                + "                 + error.getMessage(), Notification.Type.ERROR_MESSAGE);\n"
                 + "       }\n"
                 + "});\n\n"
                 + "manager.getUploader().addFilter(new PluploadFilter(\"audio files\", \"mp3, flac, wav\"));");

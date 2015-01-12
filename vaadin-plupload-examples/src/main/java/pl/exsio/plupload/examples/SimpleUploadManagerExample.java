@@ -45,14 +45,16 @@ public class SimpleUploadManagerExample extends AbstractExample {
                 + "manager.getUploader().addFileUploadedListener(new Plupload.FileUploadedListener() {\n"
                 + "       @Override\n"
                 + "       public void onFileUploaded(PluploadFile file) {\n"
-                + "             Notification.show(\"I've just uploaded file: \" + file.getName());\n"
+                + "             Notification.show(\"I've just uploaded file: \"\n"
+                + "                 + file.getName());\n"
                 + "       }\n"
                 + "});\n\n"
                 + "//handle errors\n"
                 + "manager.getUploader().addErrorListener(new Plupload.ErrorListener() {\n"
                 + "       @Override\n"
                 + "       public void onError(PluploadError error) {\n"
-                + "             Notification.show(\"There was an error: \" + error.getMessage(), Notification.Type.ERROR_MESSAGE);\n"
+                + "             Notification.show(\"There was an error: \"\n"
+                + "                 + error.getMessage(), Notification.Type.ERROR_MESSAGE);\n"
                 + "       }\n"
                 + "});");
     }

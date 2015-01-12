@@ -58,7 +58,8 @@ public class ByteArrayUploaderFieldExample extends AbstractExample {
                 + "field.getUploader().addErrorListener(new Plupload.ErrorListener() {\n"
                 + "       @Override\n"
                 + "       public void onError(PluploadError error) {\n"
-                + "             Notification.show(\"There was an error: \" + error.getMessage(), Notification.Type.ERROR_MESSAGE);\n"
+                + "             Notification.show(\"There was an error: \"\n"
+                + "                 + error.getMessage(), Notification.Type.ERROR_MESSAGE);\n"
                 + "       }\n"
                 + "});");
     }
