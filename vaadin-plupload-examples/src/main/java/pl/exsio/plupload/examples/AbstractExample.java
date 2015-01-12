@@ -1,9 +1,11 @@
 package pl.exsio.plupload.examples;
 
+import com.vaadin.server.Page;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.VerticalLayout;
 import de.fatalix.vaadin.addon.codemirror.CodeMirror;
 import de.fatalix.vaadin.addon.codemirror.CodeMirrorLanguage;
+import de.fatalix.vaadin.addon.codemirror.CodeMirrorTheme;
 
 /**
  *
@@ -20,8 +22,8 @@ public abstract class AbstractExample extends HorizontalLayout {
         VerticalLayout code = this.getCodePane();
         this.addComponent(manager);
         this.addComponent(code);
-        this.setExpandRatio(code, 0.75f);
-        this.setExpandRatio(manager, 0.25f);
+        this.setExpandRatio(code, 0.65f);
+        this.setExpandRatio(manager, 0.35f);
     }
 
     private VerticalLayout getActionPane() {
@@ -39,14 +41,24 @@ public abstract class AbstractExample extends HorizontalLayout {
     private VerticalLayout getCodePane() {
 
         VerticalLayout layout = new VerticalLayout();
-        CodeMirror code = new CodeMirror();
+        final CodeMirror code = new CodeMirror();
         this.decorateCodePane(code);
         code.setLanguage(CodeMirrorLanguage.JAVA);
         layout.addComponent(code);
         layout.setSizeFull();
-
+        code.setTheme(CodeMirrorTheme.ECLIPSE);
         code.setSizeFull();
-        code.setHeight("500px");
+        // code.setHeight("500px");
+        Page.getCurrent().addBrowserWindowResizeListener(new Page.BrowserWindowResizeListener() {
+
+            @Override
+            public void browserWindowResized(Page.BrowserWindowResizeEvent event) {
+                code.setHeight((event.getHeight() - 120) + "px");
+                 code.setWidth((event.getWidth() - 550) + "px");
+            }
+        });
+        code.setHeight((Page.getCurrent().getBrowserWindowHeight() - 120) + "px");
+        code.setWidth((Page.getCurrent().getBrowserWindowWidth() - 550) + "px");
         return layout;
     }
 }

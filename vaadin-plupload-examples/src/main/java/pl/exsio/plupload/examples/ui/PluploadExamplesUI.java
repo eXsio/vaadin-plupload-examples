@@ -53,19 +53,20 @@ public class PluploadExamplesUI extends UI {
         final VerticalLayout mainLayout = new VerticalLayout();
         mainLayout.setSpacing(true);
         mainLayout.setMargin(true);
+        this.setSizeFull();
 
-        Accordion acc = new Accordion();
-        acc.addTab(new Home(), "Home");
-        acc.addTab(new SimpleUploaderExample(), "Simple \"Plupload\" example");
-        acc.addTab(new AdvancedUploaderExample(), "\"Plupload\" example with all options");
-        acc.addTab(new SimpleUploadManagerExample(), "Simple \"UploadManager\" example");
-        acc.addTab(new UploadManagerWithFileFilterExample(), "\"UploadManager\" with file filter example");
-        acc.addTab(new UploadManagerWithImageResizeExample(), "\"UploadManager\" with image resize example");
-        acc.addTab(new FileUploaderFieldExample(), "\"UploadField\" example with java.io.File value");
-        acc.addTab(new ByteArrayUploaderFieldExample(), "\"UploadField\" example with byte[] value");
+        TabSheet container = new TabSheet();
+        container.addTab(new Home(), "Home");
+        container.addTab(new SimpleUploaderExample(), "Simple \"Plupload\"");
+        container.addTab(new AdvancedUploaderExample(), "\"Plupload\" with all options");
+        container.addTab(new SimpleUploadManagerExample(), "Simple \"PluploadManager\"");
+        container.addTab(new UploadManagerWithFileFilterExample(), "\"PluploadManager\" with file filter");
+        container.addTab(new UploadManagerWithImageResizeExample(), "\"PluploadManager\" with image resize");
+        container.addTab(new FileUploaderFieldExample(), "\"PluploadField\" with File value");
+        container.addTab(new ByteArrayUploaderFieldExample(), "\"PluploadField\" with byte[] value");
 
-        mainLayout.addComponent(acc);
-        acc.setSizeFull();
+        mainLayout.addComponent(container);
+        container.setSizeFull();
         mainLayout.setSizeFull();
 
         this.setContent(mainLayout);
