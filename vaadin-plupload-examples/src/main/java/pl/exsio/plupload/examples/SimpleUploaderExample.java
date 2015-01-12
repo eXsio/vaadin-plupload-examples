@@ -5,6 +5,7 @@ import com.vaadin.ui.Notification;
 import com.vaadin.ui.VerticalLayout;
 import de.fatalix.vaadin.addon.codemirror.CodeMirror;
 import pl.exsio.plupload.Plupload;
+import pl.exsio.plupload.PluploadError;
 import pl.exsio.plupload.PluploadFile;
 import pl.exsio.plupload.examples.util.Util;
 
@@ -49,6 +50,15 @@ public class SimpleUploaderExample extends AbstractExample {
                 info.setValue("upload is completed!");
             }
         });
+
+        uploader.addErrorListener(new Plupload.ErrorListener() {
+
+            @Override
+            public void onError(PluploadError error) {
+                Notification.show("There was an error: " + error.getMessage(), Notification.Type.ERROR_MESSAGE);
+            }
+        });
+
         pane.addComponent(uploader);
         pane.addComponent(info);
     }
@@ -65,14 +75,13 @@ public class SimpleUploaderExample extends AbstractExample {
                 + "       public void onFileUploaded(PluploadFile file) {\n"
                 + "             Notification.show(\"I've just uploaded file: \" + file.getName());\n"
                 + "       }\n"
-                + "});\n\n"                
+                + "});\n\n"
                 + "//update upload progress\n"
                 + "uploader.addUploadProgressListener(new Plupload.UploadProgressListener() {\n"
                 + "       @Override\n"
                 + "       public void onUploadProgress(PluploadFile file) {\n"
                 + "             info.setValue(\"I'm uploading \"+file.getName()+\" and I'm at \"+file.getPercent()+\"%\");\n"
                 + "       }\n"
-
                 + "});\n\n"
                 + "//autostart the uploader after addind files\n"
                 + "uploader.addFilesAddedListener(new Plupload.FilesAddedListener() {\n"
@@ -86,6 +95,13 @@ public class SimpleUploaderExample extends AbstractExample {
                 + "       @Override\n"
                 + "       public void onUploadComplete() {\n"
                 + "             info.setValue(\"upload is completed!\");\n"
+                + "       }\n"
+                + "});\n\n"
+                + "//handle errors\n"
+                + "uploader.addErrorListener(new Plupload.ErrorListener() {\n"
+                + "       @Override\n"
+                + "       public void onError(PluploadError error) {\n"
+                + "             Notification.show(\"There was an error: \" + error.getMessage(), Notification.Type.ERROR_MESSAGE);\n"
                 + "       }\n"
                 + "});");
     }

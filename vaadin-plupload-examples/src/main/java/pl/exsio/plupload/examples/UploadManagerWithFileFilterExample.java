@@ -4,6 +4,7 @@ import com.vaadin.ui.Notification;
 import com.vaadin.ui.VerticalLayout;
 import de.fatalix.vaadin.addon.codemirror.CodeMirror;
 import pl.exsio.plupload.Plupload;
+import pl.exsio.plupload.PluploadError;
 import pl.exsio.plupload.PluploadFile;
 import pl.exsio.plupload.examples.util.Util;
 import pl.exsio.plupload.helper.filter.PluploadFilter;
@@ -26,6 +27,14 @@ public class UploadManagerWithFileFilterExample extends AbstractExample {
             }
         });
         manager.getUploader().addFilter(new PluploadFilter("audio files", "mp3, flac, wav"));
+        
+        manager.getUploader().addErrorListener(new Plupload.ErrorListener() {
+
+            @Override
+            public void onError(PluploadError error) {
+                Notification.show("There was an error: " + error.getMessage(), Notification.Type.ERROR_MESSAGE);
+            }
+        });
         pane.addComponent(manager);
     }
 
@@ -39,7 +48,13 @@ public class UploadManagerWithFileFilterExample extends AbstractExample {
                 + "       public void onFileUploaded(PluploadFile file) {\n"
                 + "             Notification.show(\"I've just uploaded an audio file: \" + file.getName());\n"
                 + "       }\n"
-                + "});\n"
+                + "});\n\n"
+                + "manager.getUploader().addErrorListener(new Plupload.ErrorListener() {\n"
+                + "       @Override\n"
+                + "       public void onError(PluploadError error) {\n"
+                + "             Notification.show(\"There was an error: \" + error.getMessage(), Notification.Type.ERROR_MESSAGE);\n"
+                + "       }\n"
+                + "});\n\n"
                 + "manager.getUploader().addFilter(new PluploadFilter(\"audio files\", \"mp3, flac, wav\"));");
     }
 }

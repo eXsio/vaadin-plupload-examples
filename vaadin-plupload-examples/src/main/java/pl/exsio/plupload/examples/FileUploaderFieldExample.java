@@ -5,6 +5,7 @@ import com.vaadin.ui.VerticalLayout;
 import de.fatalix.vaadin.addon.codemirror.CodeMirror;
 import java.io.File;
 import pl.exsio.plupload.Plupload;
+import pl.exsio.plupload.PluploadError;
 import pl.exsio.plupload.PluploadFile;
 import pl.exsio.plupload.PluploadOption;
 import pl.exsio.plupload.examples.util.Util;
@@ -27,6 +28,14 @@ public class FileUploaderFieldExample extends AbstractExample {
                 Notification.show("I've just uploaded file: " + file.getName() + " (local name: " + field.getValue().getName() + ")");
             }
         });
+        
+        field.getUploader().addErrorListener(new Plupload.ErrorListener() {
+
+            @Override
+            public void onError(PluploadError error) {
+                Notification.show("There was an error: " + error.getMessage(), Notification.Type.ERROR_MESSAGE);
+            }
+        });
 
         pane.addComponent(field);
 
@@ -39,11 +48,18 @@ public class FileUploaderFieldExample extends AbstractExample {
                 + "field.getUploader().setOption(PluploadOption.MAX_FILE_SIZE, \"5mb\");\n\n"
                 + "//field value is an instance of java.io.File\n"
                 + "field.getUploader().addFileUploadedListener(new Plupload.FileUploadedListener() {\n"
-                + "     @Override\n"
-                + "         public void onFileUploaded(PluploadFile file) {\n"
+                + "       @Override\n"
+                + "       public void onFileUploaded(PluploadFile file) {\n"
                 + "             Notification.show(\"I've just uploaded file: \" + file.getName()\n"
-                + "                 + \"(local name: \" + field.getValue().getName() + \")\");\n"
-                + "         }\n"
-                + "     });");
+                + "               + \"(local name: \" + field.getValue().getName() + \")\");\n"
+                + "     }\n"
+                + "});\n\n"
+                + "//handle errors\n"
+                + "field.getUploader().addErrorListener(new Plupload.ErrorListener() {\n"
+                + "       @Override\n"
+                + "       public void onError(PluploadError error) {\n"
+                + "             Notification.show(\"There was an error: \" + error.getMessage(), Notification.Type.ERROR_MESSAGE);\n"
+                + "       }\n"
+                + "});");
     }
 }

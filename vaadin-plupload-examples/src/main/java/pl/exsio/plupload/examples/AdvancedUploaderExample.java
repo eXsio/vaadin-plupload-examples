@@ -5,6 +5,7 @@ import com.vaadin.ui.Notification;
 import com.vaadin.ui.VerticalLayout;
 import de.fatalix.vaadin.addon.codemirror.CodeMirror;
 import pl.exsio.plupload.Plupload;
+import pl.exsio.plupload.PluploadError;
 import pl.exsio.plupload.PluploadFile;
 import pl.exsio.plupload.PluploadOption;
 import pl.exsio.plupload.examples.util.Util;
@@ -44,12 +45,20 @@ public class AdvancedUploaderExample extends AbstractExample {
                 uploader.start();
             }
         });
-        
+
         uploader.addUploadCompleteListener(new Plupload.UploadCompleteListener() {
 
             @Override
             public void onUploadComplete() {
                 info.setValue("upload is completed!");
+            }
+        });
+
+        uploader.addErrorListener(new Plupload.ErrorListener() {
+
+            @Override
+            public void onError(PluploadError error) {
+                Notification.show("There was an error: " + error.getMessage(), Notification.Type.ERROR_MESSAGE);
             }
         });
 
@@ -91,12 +100,19 @@ public class AdvancedUploaderExample extends AbstractExample {
                 + "       public void onFilesAdded(PluploadFile[] files) {\n"
                 + "             uploader.start();\n"
                 + "       }\n"
-                + "});\n\n"     
+                + "});\n\n"
                 + "//notify, when the upload process is completed\n"
                 + "uploader.addUploadCompleteListener(new Plupload.UploadCompleteListener() {\n"
                 + "       @Override\n"
                 + "       public void onUploadComplete() {\n"
                 + "             info.setValue(\"upload is completed!\");\n"
+                + "       }\n"
+                + "});\n\n"
+                + "//handle errors\n"
+                + "uploader.addErrorListener(new Plupload.ErrorListener() {\n"
+                + "       @Override\n"
+                + "       public void onError(PluploadError error) {\n"
+                + "             Notification.show(\"There was an error: \" + error.getMessage(), Notification.Type.ERROR_MESSAGE);\n"
                 + "       }\n"
                 + "});\n\n"
                 + "uploader.setOption(PluploadOption.CHUNK_SIZE, \"1mb\");\n"
