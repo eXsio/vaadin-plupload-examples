@@ -45,7 +45,7 @@ public abstract class AbstractExample extends HorizontalLayout {
         layout.addComponent(code);
         layout.setSizeFull();
 
-        code.setWidth("900px");
+        code.setSizeFull();
         code.setHeight("500px");
         return layout;
     }
