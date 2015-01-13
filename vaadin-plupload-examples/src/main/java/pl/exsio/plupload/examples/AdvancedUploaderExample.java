@@ -7,7 +7,6 @@ import de.fatalix.vaadin.addon.codemirror.CodeMirror;
 import pl.exsio.plupload.Plupload;
 import pl.exsio.plupload.PluploadError;
 import pl.exsio.plupload.PluploadFile;
-import pl.exsio.plupload.PluploadOption;
 import pl.exsio.plupload.examples.util.Util;
 import pl.exsio.plupload.helper.filter.PluploadFilter;
 import pl.exsio.plupload.helper.resize.PluploadImageResize;
@@ -21,6 +20,13 @@ public class AdvancedUploaderExample extends AbstractExample {
     @Override
     protected void decorateActionPane(VerticalLayout pane) {
         final Plupload uploader = Util.createUploader();
+        uploader.setChunkSize("2mb");
+        uploader.setMaxRetries(5);
+        uploader.setMultiSelection(true);
+        uploader.setPreventDuplicates(true);
+        uploader.addFilter(new PluploadFilter("image files", "jpg, png, jpeg"));
+        uploader.setImageResize(new PluploadImageResize().setEnabled(true)
+                .setCrop(true).setHeight(100).setWidth(200));
         uploader.addFileUploadedListener(new Plupload.FileUploadedListener() {
 
             @Override
@@ -62,13 +68,6 @@ public class AdvancedUploaderExample extends AbstractExample {
             }
         });
 
-        uploader.setOption(PluploadOption.CHUNK_SIZE, "1mb");
-        uploader.setOption(PluploadOption.MAX_RETRIES, "5");
-        uploader.setOption(PluploadOption.MULTI_SELECTION, "true");
-        uploader.setOption(PluploadOption.PREVENT_DUPLICATES, "true");
-        uploader.addFilter(new PluploadFilter("image files", "jpg, png, jpeg"));
-        uploader.setImageResize(new PluploadImageResize().setEnabled(true)
-                .setCrop(true).setHeight(100).setWidth(200));
         pane.addComponent(uploader);
         pane.addComponent(info);
     }
@@ -78,7 +77,7 @@ public class AdvancedUploaderExample extends AbstractExample {
         code.setCode(""
                 + "final Plupload uploader = new Plupload(\"Browse\", FontAwesome.FILES_O);\n"
                 + "final Label info = new Label();\n\n"
-                + "uploader.setOption(PluploadOption.MAX_FILE_SIZE, \"5mb\");\n\n"
+                + "uploader.setMaxFileSize(\"5mb\");\n\n"
                 + "//show notification after file is uploaded\n"
                 + "uploader.addFileUploadedListener(new Plupload.FileUploadedListener() {\n"
                 + "       @Override\n"
@@ -117,10 +116,10 @@ public class AdvancedUploaderExample extends AbstractExample {
                 + "                 + error.getMessage(), Notification.Type.ERROR_MESSAGE);\n"
                 + "       }\n"
                 + "});\n\n"
-                + "uploader.setOption(PluploadOption.CHUNK_SIZE, \"1mb\");\n"
-                + "uploader.setOption(PluploadOption.MAX_RETRIES, \"5\");\n"
-                + "uploader.setOption(PluploadOption.MULTI_SELECTION, \"true\");\n"
-                + "uploader.setOption(PluploadOption.PREVENT_DUPLICATES, \"true\");\n"
+                + "uploader.setChunkSize(\"2mb\");\n"
+                + "uploader.setMaxRetries(5);\n"
+                + "uploader.setMultiSelection(true);\n"
+                + "uploader.setPreventDuplicates(true);\n"
                 + "uploader.addFilter(new PluploadFilter(\"image files\", \"jpg, png, jpeg\"));\n"
                 + "uploader.setImageResize(new PluploadImageResize().setEnabled(true)\n"
                 + "        .setCrop(true).setHeight(100).setWidth(200));");

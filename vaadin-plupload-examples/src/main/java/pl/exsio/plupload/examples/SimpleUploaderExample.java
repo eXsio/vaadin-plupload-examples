@@ -68,7 +68,7 @@ public class SimpleUploaderExample extends AbstractExample {
         code.setCode(""
                 + "final Plupload uploader = new Plupload(\"Browse\", FontAwesome.FILES_O);\n"
                 + "final Label info = new Label();\n\n"
-                + "uploader.setOption(PluploadOption.MAX_FILE_SIZE, \"5mb\");\n\n"
+                + "uploader.setMaxFileSize(\"5mb\");\n\n"
                 + "//show notification after file is uploaded\n"
                 + "uploader.addFileUploadedListener(new Plupload.FileUploadedListener() {\n"
                 + "       @Override\n"

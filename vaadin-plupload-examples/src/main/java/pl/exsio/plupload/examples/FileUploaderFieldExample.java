@@ -7,7 +7,6 @@ import java.io.File;
 import pl.exsio.plupload.Plupload;
 import pl.exsio.plupload.PluploadError;
 import pl.exsio.plupload.PluploadFile;
-import pl.exsio.plupload.PluploadOption;
 import pl.exsio.plupload.examples.util.Util;
 import pl.exsio.plupload.field.PluploadField;
 
@@ -20,7 +19,7 @@ public class FileUploaderFieldExample extends AbstractExample {
     @Override
     protected void decorateActionPane(VerticalLayout pane) {
         final PluploadField<File> field = Util.createField(File.class);
-        field.getUploader().setOption(PluploadOption.MAX_FILE_SIZE, "5mb");
+        field.getUploader().setMaxFileSize("5mb");
         field.getUploader().addFileUploadedListener(new Plupload.FileUploadedListener() {
 
             @Override
@@ -45,7 +44,7 @@ public class FileUploaderFieldExample extends AbstractExample {
     protected void decorateCodePane(CodeMirror code) {
         code.setCode(""
                 + "final PluploadField<File> field = new PluploadField(File.class);\n"
-                + "field.getUploader().setOption(PluploadOption.MAX_FILE_SIZE, \"5mb\");\n\n"
+                + "field.getUploader().setMaxFileSize(\"5mb\");\n\n"
                 + "//field value is an instance of java.io.File\n"
                 + "field.getUploader().addFileUploadedListener(new Plupload.FileUploadedListener() {\n"
                 + "       @Override\n"

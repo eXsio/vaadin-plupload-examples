@@ -41,7 +41,7 @@ public class SimpleUploadManagerExample extends AbstractExample {
     protected void decorateCodePane(CodeMirror code) {
         code.setCode(""
                 + "PluploadManager manager = new PluploadManager();\n"
-                + "manager.getUploader().setOption(PluploadOption.MAX_FILE_SIZE, \"5mb\");\n"
+                + "manager.getUploader().setMaxFileSize(\"5mb\");\n"
                 + "manager.getUploader().addFileUploadedListener(new Plupload.FileUploadedListener() {\n"
                 + "       @Override\n"
                 + "       public void onFileUploaded(PluploadFile file) {\n"
