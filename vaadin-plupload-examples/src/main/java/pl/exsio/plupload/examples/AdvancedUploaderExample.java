@@ -1,5 +1,7 @@
 package pl.exsio.plupload.examples;
 
+import com.vaadin.data.Property;
+import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.VerticalLayout;
@@ -68,6 +70,24 @@ public class AdvancedUploaderExample extends AbstractExample {
             }
         });
 
+        ComboBox chunkSizeChoice = new ComboBox("Choose chunk size");
+        for (double i = 0.5; i <= 3; i += 0.5) {
+            chunkSizeChoice.addItem(i + "mb");
+        }
+        chunkSizeChoice.setNullSelectionAllowed(false);
+        chunkSizeChoice.setValue("2.0mb");
+        chunkSizeChoice.addValueChangeListener(new Property.ValueChangeListener() {
+
+            @Override
+            public void valueChange(Property.ValueChangeEvent event) {
+                String chunkSize = event.getProperty().getValue().toString();
+                uploader.setChunkSize(chunkSize);
+                Notification.show("Chunk size was changed to " + chunkSize);
+            }
+        });
+
+        pane.setSpacing(true);
+        pane.addComponent(chunkSizeChoice);
         pane.addComponent(uploader);
         pane.addComponent(info);
     }
@@ -122,6 +142,21 @@ public class AdvancedUploaderExample extends AbstractExample {
                 + "uploader.setPreventDuplicates(true);\n"
                 + "uploader.addFilter(new PluploadFilter(\"image files\", \"jpg, png, jpeg\"));\n"
                 + "uploader.setImageResize(new PluploadImageResize().setEnabled(true)\n"
-                + "        .setCrop(true).setHeight(100).setWidth(200));");
+                + "        .setCrop(true).setHeight(100).setWidth(200));\n\n"
+                + "//create combo for chunk size change\n"
+                + "ComboBox chunkSizeChoice = new ComboBox(\"Choose chunk size\");\n"
+                + "for (double i = 0.5; i <= 3; i += 0.5) {\n"
+                + "    chunkSizeChoice.addItem(i + \"mb\");\n"
+                + "}\n"
+                + "chunkSizeChoice.setNullSelectionAllowed(false);\n"
+                + "chunkSizeChoice.setValue(\"2.0mb\");\n"
+                + "chunkSizeChoice.addValueChangeListener(new Property.ValueChangeListener() {\n"
+                + "    @Override\n"
+                + "    public void valueChange(Property.ValueChangeEvent event) {\n"
+                + "        String chunkSize = event.getProperty().getValue().toString();\n"
+                + "        uploader.setChunkSize(chunkSize);\n"
+                + "        Notification.show(\"Chunk size was changed to \" + chunkSize);\n"
+                + "    }\n"
+                + "});");
     }
 }

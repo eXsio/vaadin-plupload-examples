@@ -1,5 +1,10 @@
 package pl.exsio.plupload.examples;
 
+import com.vaadin.data.Buffered;
+import com.vaadin.data.Validator;
+import com.vaadin.data.validator.NullValidator;
+import com.vaadin.ui.Button;
+import com.vaadin.ui.Form;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.VerticalLayout;
 import de.fatalix.vaadin.addon.codemirror.CodeMirror;
@@ -13,7 +18,7 @@ import pl.exsio.plupload.field.PluploadField;
  *
  * @author exsio
  */
-public class ByteArrayUploaderFieldExample extends AbstractExample {
+public class ValidationUploaderFieldExample extends AbstractExample {
 
     @Override
     protected void decorateActionPane(VerticalLayout pane) {
@@ -35,7 +40,24 @@ public class ByteArrayUploaderFieldExample extends AbstractExample {
             }
         });
 
-        pane.addComponent(field);
+        field.addValidator(new NullValidator("the file must not be null", false));
+        final Form form = new Form();
+        form.addField("file", field);
+        Button commit = new Button("Commit Form", new Button.ClickListener() {
+
+            @Override
+            public void buttonClick(Button.ClickEvent event) {
+                try {
+                    form.commit();
+                    Notification.show("Form commit successful!");
+                } catch (Buffered.SourceException | Validator.InvalidValueException ex) {
+                    Notification.show("There was an error during form commit: " + ex.getMessage(), Notification.Type.ERROR_MESSAGE);
+                }
+            }
+        });
+
+        pane.addComponent(form);
+        pane.addComponent(commit);
 
     }
 
@@ -58,6 +80,21 @@ public class ByteArrayUploaderFieldExample extends AbstractExample {
                 + "       public void onError(PluploadError error) {\n"
                 + "             Notification.show(\"There was an error: \"\n"
                 + "                 + error.getMessage(), Notification.Type.ERROR_MESSAGE);\n"
+                + "       }\n"
+                + "});\n\n"
+                + "//create form\n"
+                + "final Form form = new Form();\n"
+                + "       form.addField(\"file\", field);\n"
+                + "       Button commit = new Button(\"Commit Form\", new Button.ClickListener() {\n"
+                + "       @Override\n"
+                + "       public void buttonClick(Button.ClickEvent event) {\n"
+                + "             try {\n"
+                + "                 form.commit();\n"
+                + "                 Notification.show(\"Form commit successful!\");\n"
+                + "             } catch (Buffered.SourceException | Validator.InvalidValueException ex) {\n"
+                + "                 Notification.show(\"There was an error during form commit: \"\n"
+                + "                      + ex.getMessage(), Notification.Type.ERROR_MESSAGE);\n"
+                + "             }\n"
                 + "       }\n"
                 + "});");
     }

@@ -31,7 +31,7 @@ import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.*;
 import javax.servlet.annotation.WebServlet;
 import pl.exsio.plupload.examples.AdvancedUploaderExample;
-import pl.exsio.plupload.examples.ByteArrayUploaderFieldExample;
+import pl.exsio.plupload.examples.ValidationUploaderFieldExample;
 import pl.exsio.plupload.examples.FileUploaderFieldExample;
 import pl.exsio.plupload.examples.SimpleUploadManagerExample;
 import pl.exsio.plupload.examples.SimpleUploaderExample;
@@ -58,12 +58,12 @@ public class PluploadExamplesUI extends UI {
         TabSheet container = new TabSheet();
         container.addTab(new Home(), "Home");
         container.addTab(new SimpleUploaderExample(), "Simple \"Plupload\"");
-        container.addTab(new AdvancedUploaderExample(), "\"Plupload\" with all options");
+        container.addTab(new AdvancedUploaderExample(), "Advanced \"Plupload\"");
         container.addTab(new SimpleUploadManagerExample(), "Simple \"PluploadManager\"");
         container.addTab(new UploadManagerWithFileFilterExample(), "\"PluploadManager\" with file filter");
         container.addTab(new UploadManagerWithImageResizeExample(), "\"PluploadManager\" with image resize");
         container.addTab(new FileUploaderFieldExample(), "\"PluploadField\" with File value");
-        container.addTab(new ByteArrayUploaderFieldExample(), "\"PluploadField\" with byte[] value");
+        container.addTab(new ValidationUploaderFieldExample(), "\"PluploadField\" with form validation");
 
         mainLayout.addComponent(container);
         container.setSizeFull();
