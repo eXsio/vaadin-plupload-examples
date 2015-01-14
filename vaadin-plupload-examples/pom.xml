@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>pl.exsio</groupId>
-    <artifactId>vaadin-plupload-examples</artifactId>
+    <artifactId>plupload-vaadin-examples</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
@@ -131,7 +131,7 @@
                 </executions>
             </plugin>
         </plugins>
-        <finalName>vaadin-plupload-examples</finalName>
+        <finalName>plupload-vaadin-examples</finalName>
     </build>
 
 </project>
