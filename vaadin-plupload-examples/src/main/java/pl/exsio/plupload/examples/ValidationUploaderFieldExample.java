@@ -82,6 +82,7 @@ public class ValidationUploaderFieldExample extends AbstractExample {
                 + "                 + error.getMessage(), Notification.Type.ERROR_MESSAGE);\n"
                 + "       }\n"
                 + "});\n\n"
+                + "field.addValidator(new NullValidator(\"the file must not be null\", false));\n\n"
                 + "//create form\n"
                 + "final Form form = new Form();\n"
                 + "       form.addField(\"file\", field);\n"
