@@ -60,7 +60,7 @@ public class PluploadExamplesUI extends UI {
         container.addTab(new SimpleUploaderExample(), "Simple \"Plupload\"");
         container.addTab(new AdvancedUploaderExample(), "Advanced \"Plupload\"");
         container.addTab(new SimpleUploadManagerExample(), "Simple \"PluploadManager\"");
-        container.addTab(new UploadManagerWithFileFilterExample(), "\"PluploadManager\" with file filter");
+        container.addTab(new UploadManagerWithFileFilterExample(), "\"PluploadManager\" with file filter and drop zone");
         container.addTab(new UploadManagerWithImageResizeExample(), "\"PluploadManager\" with image resize");
         container.addTab(new FileUploaderFieldExample(), "\"PluploadField\" with File value");
         container.addTab(new ValidationUploaderFieldExample(), "\"PluploadField\" with form validation");

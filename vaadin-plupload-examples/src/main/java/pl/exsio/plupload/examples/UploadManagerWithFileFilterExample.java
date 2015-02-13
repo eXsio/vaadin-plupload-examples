@@ -1,5 +1,6 @@
 package pl.exsio.plupload.examples;
 
+import com.vaadin.ui.Label;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.VerticalLayout;
 import de.fatalix.vaadin.addon.codemirror.CodeMirror;
@@ -28,6 +29,15 @@ public class UploadManagerWithFileFilterExample extends AbstractExample {
         });
         manager.getUploader().addFilter(new PluploadFilter("audio files", "mp3, flac, wav"));
 
+        VerticalLayout dropZone = new VerticalLayout() {
+            {
+                addComponent(new Label("Additional drop zone for music files"));
+                setId("music-drop-zone");
+            }
+        };
+
+        manager.getUploader().addDropZone(dropZone);
+
         manager.getUploader().addErrorListener(new Plupload.ErrorListener() {
 
             @Override
@@ -36,6 +46,7 @@ public class UploadManagerWithFileFilterExample extends AbstractExample {
             }
         });
         pane.addComponent(manager);
+        pane.addComponent(dropZone);
         manager.getUploader().setChunkSize("3mb");
     }
 
@@ -50,6 +61,14 @@ public class UploadManagerWithFileFilterExample extends AbstractExample {
                 + "             Notification.show(\"I've just uploaded an audio file: \" + file.getName());\n"
                 + "       }\n"
                 + "});\n\n"
+                + "VerticalLayout dropZone = new VerticalLayout() {\n"
+                + "       {\n"
+                + "             addComponent(new Label(\"Additional drop zone for music files\"));\n"
+                + "             //Very important! A drop zone must have an unique id!\n"
+                + "             setId(\"music-drop-zone\");\n"
+                + "        }\n"
+                + "};\n"
+                + "manager.getUploader().addDropZone(dropZone);\n\n"
                 + "manager.getUploader().addErrorListener(new Plupload.ErrorListener() {\n"
                 + "       @Override\n"
                 + "       public void onError(PluploadError error) {\n"
