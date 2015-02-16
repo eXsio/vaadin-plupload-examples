@@ -36,7 +36,7 @@ public class ValidationUploaderFieldExample extends AbstractExample {
 
             @Override
             public void onError(PluploadError error) {
-                Notification.show("There was an error: " + error.getMessage(), Notification.Type.ERROR_MESSAGE);
+                Notification.show("There was an error: " + error.getMessage() + " (" + error.getType() + ")", Notification.Type.ERROR_MESSAGE);
             }
         });
 
@@ -79,7 +79,8 @@ public class ValidationUploaderFieldExample extends AbstractExample {
                 + "       @Override\n"
                 + "       public void onError(PluploadError error) {\n"
                 + "             Notification.show(\"There was an error: \"\n"
-                + "                 + error.getMessage(), Notification.Type.ERROR_MESSAGE);\n"
+                + "                 + error.getMessage() + \" (\" + error.getType() + \")\",\n"
+                + "                 Notification.Type.ERROR_MESSAGE);\n"
                 + "       }\n"
                 + "});\n\n"
                 + "field.addValidator(new NullValidator(\"the file must not be null\", false));\n\n"

@@ -27,12 +27,12 @@ public class FileUploaderFieldExample extends AbstractExample {
                 Notification.show("I've just uploaded file: " + file.getName() + " (local name: " + field.getValue().getName() + ")");
             }
         });
-        
+
         field.getUploader().addErrorListener(new Plupload.ErrorListener() {
 
             @Override
             public void onError(PluploadError error) {
-                Notification.show("There was an error: " + error.getMessage(), Notification.Type.ERROR_MESSAGE);
+                Notification.show("There was an error: " + error.getMessage() + " (" + error.getType() + ")", Notification.Type.ERROR_MESSAGE);
             }
         });
 
@@ -58,7 +58,8 @@ public class FileUploaderFieldExample extends AbstractExample {
                 + "       @Override\n"
                 + "       public void onError(PluploadError error) {\n"
                 + "             Notification.show(\"There was an error: \"\n"
-                + "                 + error.getMessage(), Notification.Type.ERROR_MESSAGE);\n"
+                + "                 + error.getMessage() + \" (\" + error.getType() + \")\",\n"
+                + "                 Notification.Type.ERROR_MESSAGE);\n"
                 + "       }\n"
                 + "});");
     }
