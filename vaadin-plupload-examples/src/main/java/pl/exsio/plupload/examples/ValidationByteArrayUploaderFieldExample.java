@@ -41,7 +41,7 @@ import pl.exsio.plupload.field.PluploadField;
  *
  * @author exsio
  */
-public class ValidationUploaderFieldExample extends AbstractExample {
+public class ValidationByteArrayUploaderFieldExample extends AbstractExample {
 
     @Override
     protected void decorateActionPane(VerticalLayout pane) {

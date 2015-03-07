@@ -62,7 +62,9 @@ public class Util {
             @Override
             public void onUploadComplete() {
                 for (PluploadFile f : uploader.getUploadedFiles()) {
-                    f.getUploadedFile().delete();
+                    if (f.getUploadedFile() != null && f.getUploadedFile().exists()) {
+                        f.getUploadedFile().delete(); 
+                    }
                 }
             }
         };
