@@ -24,6 +24,7 @@
 package pl.exsio.plupload.examples.util;
 
 import com.vaadin.server.FontAwesome;
+import java.io.File;
 import pl.exsio.plupload.Plupload;
 import pl.exsio.plupload.PluploadFile;
 import pl.exsio.plupload.field.PluploadField;
@@ -62,8 +63,8 @@ public class Util {
             @Override
             public void onUploadComplete() {
                 for (PluploadFile f : uploader.getUploadedFiles()) {
-                    if (f.getUploadedFile() != null && f.getUploadedFile().exists()) {
-                        f.getUploadedFile().delete(); 
+                    if (f.getUploadedFile() != null && f.getUploadedFile() instanceof File && f.getUploadedFileAs(File.class).exists()) {
+                        f.getUploadedFileAs(File.class).delete();
                     }
                 }
             }
