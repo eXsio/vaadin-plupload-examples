@@ -49,7 +49,7 @@ public class AdvancedUploaderExample extends AbstractExample {
         uploader.setMaxRetries(5);
         uploader.setMultiSelection(true);
         uploader.setPreventDuplicates(true);
-        uploader.addFilter(new PluploadFilter("image files", "jpg, png, jpeg"));
+        uploader.addFilter(new PluploadFilter("image files", "jpg,png,jpeg"));
         uploader.setImageResize(new PluploadImageResize().setEnabled(true)
                 .setCrop(true).setHeight(100).setWidth(200));
         uploader.addFileUploadedListener(new Plupload.FileUploadedListener() {
@@ -164,7 +164,7 @@ public class AdvancedUploaderExample extends AbstractExample {
                 + "uploader.setMaxRetries(5);\n"
                 + "uploader.setMultiSelection(true);\n"
                 + "uploader.setPreventDuplicates(true);\n"
-                + "uploader.addFilter(new PluploadFilter(\"image files\", \"jpg, png, jpeg\"));\n"
+                + "uploader.addFilter(new PluploadFilter(\"image files\", \"jpg,png,jpeg\"));\n"
                 + "uploader.setImageResize(new PluploadImageResize().setEnabled(true)\n"
                 + "        .setCrop(true).setHeight(100).setWidth(200));\n\n"
                 + "//create combo for chunk size change\n"

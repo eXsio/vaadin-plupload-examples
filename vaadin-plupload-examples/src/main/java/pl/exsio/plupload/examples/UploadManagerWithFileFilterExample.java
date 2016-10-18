@@ -50,7 +50,7 @@ public class UploadManagerWithFileFilterExample extends AbstractExample {
                 Notification.show("I've just uploaded an audio file: " + file.getName());
             }
         });
-        manager.getUploader().addFilter(new PluploadFilter("audio files", "mp3, flac, wav"));
+        manager.getUploader().addFilter(new PluploadFilter("audio files", "mp3,flac,wav"));
 
         VerticalLayout dropZone = new VerticalLayout() {
             {
@@ -101,6 +101,6 @@ public class UploadManagerWithFileFilterExample extends AbstractExample {
                 + "       }\n"
                 + "});\n\n"
                 + "manager.getUploader().setChunkSize(\"3mb\");\n"
-                + "manager.getUploader().addFilter(new PluploadFilter(\"audio files\", \"mp3, flac, wav\"));");
+                + "manager.getUploader().addFilter(new PluploadFilter(\"audio files\", \"mp3,flac,wav\"));");
     }
 }

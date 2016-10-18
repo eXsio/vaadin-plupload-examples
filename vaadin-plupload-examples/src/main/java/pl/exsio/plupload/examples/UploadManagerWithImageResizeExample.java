@@ -50,7 +50,7 @@ public class UploadManagerWithImageResizeExample extends AbstractExample {
                 Notification.show("I've just uploaded and resized an image: " + file.getName());
             }
         });
-        manager.getUploader().addFilter(new PluploadFilter("image files", "jpg, png, jpeg"));
+        manager.getUploader().addFilter(new PluploadFilter("image files", "jpg,png,jpeg"));
         manager.getUploader().setImageResize(new PluploadImageResize()
                 .setEnabled(true).setCrop(true).setWidth(200).setHeight(100));
 
@@ -85,7 +85,7 @@ public class UploadManagerWithImageResizeExample extends AbstractExample {
                 + "                 Notification.Type.ERROR_MESSAGE);\n"
                 + "       }\n"
                 + "});\n\n"
-                + "manager.getUploader().addFilter(new PluploadFilter(\"image files\", \"jpg, png, jpeg\"));\n"
+                + "manager.getUploader().addFilter(new PluploadFilter(\"image files\", \"jpg,png,jpeg\"));\n"
                 + "manager.getUploader().setImageResize(new PluploadImageResize()\n"
                 + "        setEnabled(true).setCrop(true).setWidth(200).setHeight(100));");
     }
